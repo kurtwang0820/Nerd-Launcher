@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * a simple launcher
  * Created by Kurt on 3/5/2015.
  */
 public class NerdLauncherFragment extends ListFragment {
@@ -29,7 +30,7 @@ public class NerdLauncherFragment extends ListFragment {
         startupIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         PackageManager pm=getActivity().getPackageManager();
         List<ResolveInfo> activities=pm.queryIntentActivities(startupIntent,0);
-        Log.i(TAG, "I've found " + activities.size() + " activities.");
+//        Log.i(TAG, "I've found " + activities.size() + " activities.");
         Collections.sort(activities, new Comparator<ResolveInfo>() {
             @Override
             public int compare(ResolveInfo lhs, ResolveInfo rhs) {
@@ -44,6 +45,7 @@ public class NerdLauncherFragment extends ListFragment {
                 TextView tv=(TextView)v;
                 ResolveInfo ri=getItem(pos);
                 tv.setText(ri.loadLabel(pm));
+                tv.setCompoundDrawablesWithIntrinsicBounds(ri.loadIcon(pm), null, null, null);
                 return v;
             }
         };
